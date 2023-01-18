@@ -26,7 +26,7 @@ void print_da_array(int *array, int start, int end)
 
 	for (i = start; i < end; i++)
 	{
-		printf("%d ", array[i]);
+		printf("%d", array[i]);
 		if (i < end - 1)
 			printf(", ");
 		else
