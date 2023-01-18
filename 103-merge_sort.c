@@ -5,7 +5,6 @@
  * @array: pointer to array to sort
  * @size: size of array
  */
-
 void merge_sort(int *array, size_t size)
 {
 	int *tmp_arr = malloc(sizeof(array[0]) * size);
@@ -13,40 +12,6 @@ void merge_sort(int *array, size_t size)
 	copy_array(array, 0, tmp_arr, size);
 	recur_split(array, tmp_arr, 0, size);
 	free(tmp_arr);
-}
-
-/**
- * recur_split - recursively splits array into subarrays
- * @array: pointer to array to sort
- * @tmp_arr: pointer to temporary array
- * @start: start index of array
- * @end: end index of array
- */
-void recur_split(int *array, int *tmp_arr, size_t start, size_t end)
-{
-	size_t mid;
-
-	if (end - start < 2)
-		return;
-	mid = (start + end) / 2;
-	recur_split(tmp_arr, array, start, mid);
-	recur_split(tmp_arr, array, mid, end);
-	merge_it(array, tmp_arr, start, mid, end);
-}
-
-/**
- * copy_array - copies array into temporary array
- * @array: pointer to array to copy
- * @start: start index of array
- * @tmp_arr: pointer to temporary array
- * @end: end index of array
- */
-void copy_array(int *array, size_t start, int *tmp_arr, size_t end)
-{
-	size_t i;
-
-	for (i = start; i < end; i++)
-		tmp_arr[i] = array[i];
 }
 
 /**
@@ -67,6 +32,40 @@ void print_da_array(int *array, size_t start, size_t end)
 		else
 			printf("\n");
 	}
+}
+
+/**
+ * copy_array - copies array into temporary array
+ * @array: pointer to array to copy
+ * @start: start index of array
+ * @tmp_arr: pointer to temporary array
+ * @end: end index of array
+ */
+void copy_array(int *array, size_t start, int *tmp_arr, size_t end)
+{
+	size_t i;
+
+	for (i = start; i < end; i++)
+		tmp_arr[i] = array[i];
+}
+
+/**
+ * recur_split - recursively splits array into subarrays
+ * @array: pointer to array to sort
+ * @tmp_arr: pointer to temporary array
+ * @start: start index of array
+ * @end: end index of array
+ */
+void recur_split(int *array, int *tmp_arr, size_t start, size_t end)
+{
+	size_t mid;
+
+	if (end - start < 2)
+		return;
+	mid = (start + end) / 2;
+	recur_split(tmp_arr, array, start, mid);
+	recur_split(tmp_arr, array, mid, end);
+	merge_it(array, tmp_arr, start, mid, end);
 }
 
 /**
