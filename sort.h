@@ -28,5 +28,11 @@ int list_len(listint_t *h);
 void swap_ints(int *a, int *b);
 int lomuto_partition(int *array, size_t size, int l, int r);
 void lomuto_sort(int *array, size_t size, int l, int r);
+void swap(int *a, int *b);
+void heapify(int *arr, int size_int, int i, size_t size);
+void heap_sort(int *array, size_t size);
+void helper(int *array, int *temp, size_t lo, size_t hi);
+void merge(int *array, int *temp, size_t llo, size_t lhi, size_t rlo, size_t rhi);
+void merge_sort(int *array, size_t size);
 
 #endif
