@@ -9,8 +9,8 @@ void merge_sort(int *array, size_t size)
 {
 	int *tmp_arr = malloc(sizeof(array[0]) * size);
 
-	copy_array(array, 0, tmp_arr, size);
-	recur_split(array, tmp_arr, 0, size);
+	copy_array(array, 0, size, tmp_arr);
+	recur_split(tmp_arr, 0, size, array);
 	free(tmp_arr);
 }
 
@@ -20,9 +20,9 @@ void merge_sort(int *array, size_t size)
  * @start: start index of array
  * @end: end index of array
  */
-void print_da_array(int *array, size_t start, size_t end)
+void print_da_array(int *array, int start, int end)
 {
-	size_t i;
+	int i;
 
 	for (i = start; i < end; i++)
 	{
@@ -41,9 +41,9 @@ void print_da_array(int *array, size_t start, size_t end)
  * @tmp_arr: pointer to temporary array
  * @end: end index of array
  */
-void copy_array(int *array, size_t start, int *tmp_arr, size_t end)
+void copy_array(int *array, int start, int end, int *tmp_arr)
 {
-	size_t i;
+	int i;
 
 	for (i = start; i < end; i++)
 		tmp_arr[i] = array[i];
@@ -56,16 +56,15 @@ void copy_array(int *array, size_t start, int *tmp_arr, size_t end)
  * @start: start index of array
  * @end: end index of array
  */
-void recur_split(int *array, int *tmp_arr, size_t start, size_t end)
+void recur_split(int *tmp_arr, int start, int end, int *array)
 {
-	size_t mid;
+	int mid = (start + end) / 2;
 
-	if (end - start < 2)
+	if (end - start <= 1)
 		return;
-	mid = (start + end) / 2;
-	recur_split(tmp_arr, array, start, mid);
-	recur_split(tmp_arr, array, mid, end);
-	merge_it(array, tmp_arr, start, mid, end);
+	recur_split(array, start, mid, tmp_arr);
+	recur_split(array, mid, end, tmp_arr);
+	merge_it(tmp_arr, start, mid, end, array);
 }
 
 /**
@@ -76,9 +75,9 @@ void recur_split(int *array, int *tmp_arr, size_t start, size_t end)
  * @mid: middle index of array
  * @end: end index of array
  */
-void merge_it(int *array, int *tmp_arr, size_t start, size_t mid, size_t end)
+void merge_it(int *array, int start, int mid, int end, int *tmp_arr)
 {
-	size_t i = start, j = mid, k = start;
+	int i = start, j = mid, k = start;
 
 	for (k = start; k < end; k++)
 	{
