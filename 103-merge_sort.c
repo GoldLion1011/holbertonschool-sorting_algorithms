@@ -22,17 +22,17 @@ void merge_sort(int *array, size_t size)
  * @start: start index of array
  * @end: end index of array
  */
- void recur_split(int *array, int *tmp_arr, size_t start, size_t end)
- {
-	 size_t mid;
+void recur_split(int *array, int *tmp_arr, size_t start, size_t end)
+{
+	size_t mid;
 
-	 if (end - start < 2)
-		 return;
-	 mid = (start + end) / 2;
-	 recur_split(tmp_arr, array, start, mid);
-	 recur_split(tmp_arr, array, mid, end);
-	 merge_it(array, tmp_arr, start, mid, end);
- }
+	if (end - start < 2)
+		return;
+	mid = (start + end) / 2;
+	recur_split(tmp_arr, array, start, mid);
+	recur_split(tmp_arr, array, mid, end);
+	merge_it(array, tmp_arr, start, mid, end);
+}
 
 /**
  * copy_array - copies array into temporary array
@@ -60,7 +60,7 @@ void print_da_array(int *array, size_t start, size_t end)
 	size_t i;
 
 	for (i = start; i < end; i++)
-	{	
+	{
 		printf("%d ", array[i]);
 		if (i < end - 1)
 			printf(", ");
@@ -81,14 +81,9 @@ void merge_it(int *array, int *tmp_arr, size_t start, size_t mid, size_t end)
 {
 	size_t i = start, j = mid, k = start;
 
-	printf("Merging...\n");
-	printf("[left]: ");
-	print_da_array(tmp_arr, start, mid);
-	printf("[right]: ");
-	print_da_array(tmp_arr, mid, end);
-	while (i < mid && j < end)
+	for (k = start; k < end; k++)
 	{
-		if (tmp_arr[i] <= tmp_arr[j])
+		if (i < mid && (j >= end || tmp_arr[i] <= tmp_arr[j]))
 		{
 			array[k] = tmp_arr[i];
 			i++;
@@ -98,20 +93,11 @@ void merge_it(int *array, int *tmp_arr, size_t start, size_t mid, size_t end)
 			array[k] = tmp_arr[j];
 			j++;
 		}
-		k++;
 	}
-	while (i < mid)
-	{
-		array[k] = tmp_arr[i];
-		i++;
-		k++;
-	}
-	while (j < end)
-	{
-		array[k] = tmp_arr[j];
-		j++;
-		k++;
-	}
+	printf("Merging...\n[left]: ");
+	print_da_array(tmp_arr, start, mid);
+	printf("[right]: ");
+	print_da_array(tmp_arr, mid, end);
 	printf("[Done]: ");
 	print_da_array(array, start, end);
 }
