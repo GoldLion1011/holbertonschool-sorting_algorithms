@@ -83,21 +83,21 @@ void merge_it(int *array, int *tmp_arr, size_t start, size_t mid, size_t end)
 
 	for (k = start; k < end; k++)
 	{
-		if (i < mid && (j >= end || tmp_arr[i] <= tmp_arr[j]))
+		if (i < mid && (j >= end || array[i] <= array[j]))
 		{
-			array[k] = tmp_arr[i];
+			tmp_arr[k] = array[i];
 			i++;
 		}
 		else
 		{
-			array[k] = tmp_arr[j];
+			tmp_arr[k] = array[j];
 			j++;
 		}
 	}
 	printf("Merging...\n[left]: ");
-	print_da_array(tmp_arr, start, mid);
+	print_da_array(array, start, mid);
 	printf("[right]: ");
-	print_da_array(tmp_arr, mid, end);
+	print_da_array(array, mid, end);
 	printf("[Done]: ");
-	print_da_array(array, start, end);
+	print_da_array(tmp_arr, start, end);
 }
