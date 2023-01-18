@@ -31,8 +31,10 @@ void lomuto_sort(int *array, size_t size, int l, int r);
 void swap(int *a, int *b);
 void heapify(int *arr, int size_int, int i, size_t size);
 void heap_sort(int *array, size_t size);
-void helper(int *array, int *temp, size_t lo, size_t hi);
-void merge(int *array, int *temp, size_t llo, size_t lhi, size_t rlo, size_t rhi);
 void merge_sort(int *array, size_t size);
+void recur_split(int *array, int *tmp_arr, size_t start, size_t end);
+void copy_array(int *array, size_t start, int *tmp_arr, size_t end);
+void print_da_array(int *array, size_t start, size_t end);
+void merge_it(int *array, int *tmp_arr, size_t start, size_t mid, size_t end);
 
 #endif
